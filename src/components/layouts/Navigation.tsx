@@ -1,4 +1,3 @@
-
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Navigation() {
@@ -15,19 +14,35 @@ function Navigation() {
     <div className="navbar">
       <nav className="navbarNav">
         <ul className="navbarListItems">
-          <li className="navbarListItem" onClick={() => navigate('/')}>
-            <p className={pathMatchRoute('/') ? 'navbarListItemNameActive' : 'navbarListItemName'}> Home</p>
+          <li className="navbarListItem">
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className={
+                pathMatchRoute('/')
+                  ? 'navbarListItemNameActive'
+                  : 'navbarListItemName'
+              }
+            >
+              {' '}
+              Home
+            </button>
           </li>
-          <li className="navbarListItem" onClick={() => navigate('/about')}>
-            <p className={pathMatchRoute('/about') ? 'navbarListItemNameActive' : 'navbarListItemName'}>
-               About
-            </p>
+          <li className="navbarListItem">
+            <button
+              type="button"
+              onClick={() => navigate('/about')}
+              className={
+                pathMatchRoute('/about')
+                  ? 'navbarListItemNameActive'
+                  : 'navbarListItemName'
+              }
+            >
+              About
+            </button>
           </li>
         </ul>
       </nav>
-
-
-
 
       <hr />
 
