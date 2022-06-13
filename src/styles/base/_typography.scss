@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
-* {
-  // this is a bad idea, but works for now
-  font-variation-settings: 'wght' var(--font-weight, 375), 'wdth' var(--font-width, 80);
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap");
+// * {
+//   // this is a bad idea, but works for now
+//   font-variation-settings: "wght" var(--font-weight, 375),
+//     "wdth" var(--font-width, 80);
+// }
 
 body {
   font-size: var(--fs-400);
-  font-family: 'Lato', sans-serif;
+  font-family: "Roboto Mono", monospace;
   color: var(--clr-neutral-900);
   letter-spacing: -0.5px;
 }

@@ -1,12 +1,12 @@
 import React from 'react';
-import Progress from '../components/layouts/Progress';
+import Spinner from '../components/layouts/Spinner';
 
 function About() {
   return (
-    <div>
+    <div style={{ backgroundColor: 'blue' }}>
       About
       <div>
-        <Progress done="100" />
+        <Spinner />
       </div>
     </div>
   );

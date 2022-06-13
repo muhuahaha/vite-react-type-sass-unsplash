@@ -1,3 +1,6 @@
+@use "../abstracts" as *;
+@debug $colors;
+
 .navbar {
   background-color: red;
   padding: 0.5rem;
@@ -24,4 +27,47 @@
 
 .navbarListItemNameActive {
   color: rgb(255, 0, 217);
+}
+
+.logo {
+  margin: 2rem;
+}
+
+.primary-header {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.primary-navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(251, 15, 15, 0.2);
+  backdrop-filter: blur(0.7rem);
+
+  @include maxq(small) {
+    position: fixed;
+    flex-direction: column;
+    padding: min(20vh, 10rem) 2em;
+
+    inset: 0 0 0 30%;
+  }
+  // @include mq(medium) {
+  //   background-color: fuchsia;
+  //   padding: 2em;
+  // }
+  // @include mq(large) {
+  //   background-color: orchid;
+  //   padding: 3em;
+  // }
+}
+
+.primary-navigation {
+  text-decoration: none;
+}
+
+.primary-navigation [aria-hidden="true"] {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-inline-end: 0.2em;
 }
