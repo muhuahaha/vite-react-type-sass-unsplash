@@ -1,27 +1,34 @@
+import { useState, lazy, Suspense, useEffect } from 'react';
 import './styles/style.scss';
-import { lazy, Suspense } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-  Link,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navigation from './components/layouts/Navigation';
 import Home from './pages/Home';
+import Progress from './components/layouts/Progress';
 
 const About = lazy(() => import('./pages/About'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const AboutPage = () => (
-  <Suspense fallback={<div>loading...</div>}>
+  <Suspense
+    fallback={
+      <div>
+        <Progress done="100" />
+      </div>
+    }
+  >
     <About />
   </Suspense>
 );
 
 const NotFoundPage = () => (
-  <Suspense fallback={<div>loading...</div>}>
+  <Suspense
+    fallback={
+      <div>
+        <Progress done="100" />
+      </div>
+    }
+  >
     <NotFound />
   </Suspense>
 );
