@@ -2,23 +2,23 @@
 @debug $colors;
 
 .navbar {
-  background-color: red;
   padding: 0.5rem;
+  background-color: red;
 }
 
 .navbarNav {
+  padding: 1rem;
   background-color: blue;
-  padding: 0.5rem;
 }
 
 .navbarListItems {
-  background-color: yellow;
   padding: 0.5rem;
+  background-color: rgb(255, 0, 0);
 }
 
 .navbarListItem {
-  background-color: rgb(244, 160, 244);
   padding: 0.5rem;
+  background-color: rgb(244, 160, 244);
 }
 
 .navbarListItemName {
@@ -26,6 +26,8 @@
 }
 
 .navbarListItemNameActive {
+  padding: 0.5rem;
+  background-color: aqua;
   color: rgb(255, 0, 217);
 }
 
@@ -39,18 +41,37 @@
 }
 
 .primary-navigation {
-  list-style: none;
   padding: 0;
   margin: 0;
-  background-color: rgba(251, 15, 15, 0.2);
-  backdrop-filter: blur(0.7rem);
+  background-color: rgba(0, 0, 0, 0.77);
+  list-style: none;
+
+  // @supports (backdrop-filter: blur(1rem)) {
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   backdrop-filter: blur(1rem);
+  // }
+  @media (min-width: 40em) and (max-width: 65em) {
+    background-color: orange;
+    button > span[aria-hidden] {
+      display: none;
+    }
+  }
+
+  @media (min-width: 40em) {
+    gap: clamp(1.5rem, 5vw, 3rem);
+    padding-block: 2rem;
+    padding-inline: clamp(3rem, 15vw, 10rem);
+  }
 
   @include maxq(small) {
     position: fixed;
+    z-index: 1000;
     flex-direction: column;
+    gap: 2rem;
     padding: min(20vh, 10rem) 2em;
-
     inset: 0 0 0 30%;
+    transform: translateX(100%);
+    transition: transform 350ms ease-out;
   }
   // @include mq(medium) {
   //   background-color: fuchsia;
@@ -62,6 +83,28 @@
   // }
 }
 
+.primary-navigation[data-visible="true"] {
+  @include maxq(small) {
+    transform: translateX(0%);
+  }
+}
+
+.mobile-nav-toggle {
+  display: block;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 1rem;
+  background-color: red;
+  aspect-ratio: 1;
+  border: none;
+
+  z-index: 9999;
+  @include mq(small) {
+    display: none;
+  }
+}
+
 .primary-navigation {
   text-decoration: none;
 }
@@ -70,4 +113,19 @@
   font-weight: bold;
   font-size: 2rem;
   margin-inline-end: 0.2em;
+}
+
+.test {
+  background-color: darkgoldenrod;
+  transition: all 350ms ease-out;
+}
+
+.test1 {
+  background-color: rgb(11, 164, 184);
+  transition: all 350ms ease-out;
+}
+
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
 }
