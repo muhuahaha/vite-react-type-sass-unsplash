@@ -20,7 +20,10 @@ const useAutoClose = ({ setShow, menuRef }: AutoCloseProps) => {
   const handleClosure = useCallback(
     (event: { target: any }): any => {
       console.log('event', event.target);
-      return !menuRef.current.contains(event.target as Node) && setShow(false);
+      return (
+        !menuRef.current.contains(event.target as HTMLLinkElement) &&
+        setShow(false)
+      );
     },
     [setShow, menuRef]
   );
