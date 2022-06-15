@@ -6,11 +6,22 @@ interface Size {
   height: number;
 }
 
-const useAutoClose = ({ setShow, menuRef }) => {
-  console.log(typeof setShow, 'shhhooww tryppe');
+interface AutoCloseProps {
+  setShow: (x: boolean) => void;
+  menuRef: {
+    current: HTMLLinkElement;
+  };
+}
+
+const useAutoClose = ({ setShow, menuRef }: AutoCloseProps) => {
+  // console.log(typeof setShow, 'shhhooww tryppe');
+  console.log(menuRef, 'menuRef tryppe');
+
   const handleClosure = useCallback(
-    (event) =>
-      !menuRef?.current?.contains(event.target as Node) && setShow(false),
+    (event: { target: any }): any => {
+      console.log('event', event.target);
+      return !menuRef.current.contains(event.target as Node) && setShow(false);
+    },
     [setShow, menuRef]
   );
 
