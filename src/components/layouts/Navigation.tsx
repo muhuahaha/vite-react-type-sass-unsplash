@@ -9,7 +9,7 @@ interface Size {
 interface AutoCloseProps {
   setShow: (x: boolean) => void;
   menuRef: {
-    current: HTMLLinkElement;
+    current: HTMLLinkElement | null;
   };
 }
 
@@ -21,7 +21,7 @@ const useAutoClose = ({ setShow, menuRef }: AutoCloseProps) => {
     (event: { target: any }): any => {
       console.log('event', event.target);
       return (
-        !menuRef.current.contains(event.target as HTMLLinkElement) &&
+        !menuRef?.current?.contains(event.target as HTMLLinkElement) &&
         setShow(false)
       );
     },
