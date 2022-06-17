@@ -3,22 +3,22 @@
 
 .navbar {
   padding: 0.5rem;
-  background-color: red;
+  // background-color: red;
 }
 
 .navbarNav {
-  padding: 1rem;
-  background-color: blue;
+  padding: 4rem;
+  // background-color: blue;
 }
 
 .navbarListItems {
   padding: 0.5rem;
-  background-color: rgb(255, 0, 0);
+  // background-color: rgb(255, 0, 0);
 }
 
 .navbarListItem {
   padding: 0.5rem;
-  background-color: rgb(244, 160, 244);
+  // background-color: rgb(244, 160, 244);
 }
 
 .navbarListItemName {
@@ -89,20 +89,36 @@
   }
 }
 
+.open {
+  background-color: darkgoldenrod;
+  // transform: translateX(0%);
+  transition: all 350ms ease-out;
+}
+
+.close {
+  background-color: rgb(11, 164, 184);
+  // transform: translateX(100%);
+  transition: all 350ms ease-out;
+}
+
 .mobile-nav-toggle {
   display: block;
   position: absolute;
   top: 2rem;
   right: 2rem;
-  width: 1rem;
+  // width: 3rem;
+  padding: 0.1rem 0.5rem;
   background-color: red;
   aspect-ratio: 1;
   border: none;
-
   z-index: 9999;
   @include mq(small) {
     display: none;
   }
+}
+
+.mobile-nav-toggle[aria-expanded="true"] {
+  background: green;
 }
 
 .primary-navigation {
@@ -115,17 +131,45 @@
   margin-inline-end: 0.2em;
 }
 
-.test {
-  background-color: darkgoldenrod;
-  transition: all 350ms ease-out;
-}
-
-.test1 {
-  background-color: rgb(11, 164, 184);
-  transition: all 350ms ease-out;
-}
-
 .resize-animation-stopper * {
   animation: none !important;
   transition: none !important;
+}
+
+// .hamburger {
+//   background-color: green;
+//   &:hover {
+//     background-color: rgb(152, 255, 152);
+//     .line-one {
+//       animation: line-grow ease-out 500ms;
+//     }
+//     .line-two {
+//       animation: line-grow ease-out 300ms;
+//     }
+//     .line-three {
+//       animation: line-grow ease-out 500ms;
+//     }
+//   }
+// }
+
+// .hamburger:hover .line-one,
+// .hamburger:hover .line-two,
+// .hamburger:hover .line-three {
+//   animation: line-grow ease-out 500ms;
+// }
+
+// @keyframes line-grow {
+//   0% {
+//     transform: scaleX(1);
+//   }
+//   50% {
+//     transform: scaleX(1.5);
+//   }
+//   100% {
+//     transform: scaleX(1);
+//   }
+// }
+
+.test {
+  width: 80px;
 }

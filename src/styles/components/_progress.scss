@@ -17,7 +17,7 @@
   transition: 0.8s ease 0.3s;
 }
 
-svg {
+.spinner svg {
   animation: 2s linear infinite svg-animation;
   max-width: 100px;
 }

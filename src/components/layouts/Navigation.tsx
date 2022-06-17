@@ -1,62 +1,16 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-
-interface Size {
-  width: number;
-  height: number;
-}
-
-interface AutoCloseProps {
-  setShow: (x: boolean) => void;
-  menuRef: {
-    current: HTMLLinkElement | null;
-  };
-}
-
-const useAutoClose = ({ setShow, menuRef }: AutoCloseProps) => {
-  // console.log(typeof setShow, 'shhhooww tryppe');
-  console.log(menuRef, 'menuRef tryppe');
-
-  const handleClosure = useCallback(
-    (event: { target: any }): any => {
-      console.log('event', event.target);
-      return (
-        !menuRef?.current?.contains(event.target as HTMLLinkElement) &&
-        setShow(false)
-      );
-    },
-    [setShow, menuRef]
-  );
-
-  useEffect(() => {
-    window.addEventListener('click', handleClosure);
-    window.addEventListener('focusin', handleClosure);
-
-    return () => {
-      window.removeEventListener('click', handleClosure);
-      window.removeEventListener('focusin', handleClosure);
-    };
-  }, [handleClosure, menuRef]);
-};
+import HamburgerButton from './HamburgerButton';
+import { useAutoClose } from '../../hooks/useAutoClose';
+import useResize from '../../hooks/useResize';
 
 function Navigation() {
-  const menuRef = useRef<HTMLLinkElement>(null);
-  const navToggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const [show, setShow] = useState(false);
-  const [size, setSize] = useState<Size>({
-    width: 0,
-    height: 0,
-  });
-  console.log(show, 'show');
-
-  useAutoClose({ setShow, menuRef });
-
-  const testHandle = () => {
-    setShow(!show);
-  };
+  const [reversed, setReversed] = useState(false);
 
   const pathMatchRoute = (route: string) => {
     if (route === location.pathname) {
@@ -64,43 +18,37 @@ function Navigation() {
     }
   };
 
+  const onpress = (event: React.SyntheticEvent) => {
+    console.log('haahahha');
+    event.stopPropagation();
+    setShow(!show);
+    setReversed(!reversed);
+  };
+
   useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    console.log(show, 'show 1');
   }, []);
 
-  useEffect(() => {
-    if (size.width > 768 && show) {
-      console.log('show and > 768px', show);
-      document.body.classList.add('resize-animation-stopper');
-      setTimeout(() => {
-        console.log('This will run after .3 second!');
-        document.body.classList.remove('resize-animation-stopper');
-      }, 300);
-      setShow(false);
-    }
-  }, [size.width, show]);
+  useAutoClose({ setShow, menuRef, setReversed });
+  useResize({ setShow, show });
 
   return (
     <div className="">
       <header className="primary-header d-flex">
         <div className="logo">
           <h1>YTK</h1>
-          <button
-            ref={navToggleRef}
+          <HamburgerButton
+            onClick={onpress}
+            label="Menu"
+            reversed={reversed}
+            aria-controls="primary-navigation"
+            aria-expanded={show}
+          />
+
+          {/* <button
             onClick={(event) => {
               event.stopPropagation();
-              testHandle();
+              setShow(!show);
             }}
             type="button"
             className="mobile-nav-toggle"
@@ -108,15 +56,15 @@ function Navigation() {
             aria-expanded={show}
           >
             <span className="sr-only" />
-            asd
-          </button>
+            Menu
+          </button> */}
         </div>
 
         <nav className="navbarNav">
           <ul
             ref={menuRef}
             id="primary-navigation"
-            className={`${show ? 'test' : 'test1'} primary-navigation d-flex`}
+            className={`${show ? 'open' : 'close'} primary-navigation d-flex`}
             data-visible={show}
           >
             <li className="navbarListItem">
@@ -124,7 +72,8 @@ function Navigation() {
                 type="button"
                 onClick={() => {
                   navigate('/');
-                  testHandle();
+                  setShow(!show);
+                  setReversed(!reversed);
                 }}
                 className={
                   pathMatchRoute('/')
@@ -141,7 +90,8 @@ function Navigation() {
                 type="button"
                 onClick={() => {
                   navigate('/about');
-                  testHandle();
+                  setShow(!show);
+                  setReversed(!reversed);
                 }}
                 className={
                   pathMatchRoute('/about')
