@@ -1,6 +1,8 @@
-import { useState, lazy, Suspense, useEffect } from 'react';
+import { useState, lazy, Suspense, useEffect, useContext } from 'react';
 import './styles/style.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { ThemeProvider } from './context/ThemeContext';
 
 import Navigation from './components/layouts/Navigation';
 import Home from './pages/Home';
@@ -49,17 +51,19 @@ const NotFoundPage = () => (
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Navigation />
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/page-one" element={<PageOnePage />} />
+      <ThemeProvider>
+        <Router>
+          <Navigation />
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/page-one" element={<PageOnePage />} />
 
-          <Route path="/notfound" element={<NotFoundPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Router>
+            <Route path="/notfound" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }

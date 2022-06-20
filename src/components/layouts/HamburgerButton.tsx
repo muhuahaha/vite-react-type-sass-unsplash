@@ -46,14 +46,14 @@ const HamburgerButton = forwardRef(
         })
         .to(q('.line-one'), {
           transformOrigin: '50% 50%',
-          y: 8,
+          y: 12,
           duration: 0.25,
           delay: 'slide',
           ease: 'Power2.easeInOut',
         })
         .to(q('.line-three'), {
           transformOrigin: '50% 50%',
-          y: -20,
+          y: -16,
           duration: 0.25,
           delay: 'slide',
           ease: 'Power2.easeInOut',
@@ -85,13 +85,13 @@ const HamburgerButton = forwardRef(
     return (
       <button
         type="button"
-        className="mobile-nav-toggle"
+        className="mobile-nav-toggle test"
         onClick={onClick}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         aria-controls="primary-navigation"
       >
-        <span className="sr-only"> {label}</span>
+        {/* <span className="sr-only"> {label}</span> */}
         {/* <div className="test" ref={el}>
         <div>
           <button type="button" onClick={() => setReversed(!reversed)}>
@@ -112,9 +112,9 @@ const HamburgerButton = forwardRef(
               ref={lineOne}
               className="line-one box"
               x1="25"
-              y1="42"
+              y1="38"
               x2="75"
-              y2="42"
+              y2="38"
               fill="none"
               stroke="black"
               strokeMiterlimit="10"
@@ -124,9 +124,9 @@ const HamburgerButton = forwardRef(
               ref={lineTwo}
               className="line-two box"
               x1="25"
-              y1="56"
+              y1="52"
               x2="75"
-              y2="56"
+              y2="52"
               fill="none"
               stroke="black"
               strokeMiterlimit="10"
@@ -136,9 +136,9 @@ const HamburgerButton = forwardRef(
               ref={lineThree}
               className="line-three box"
               x1="25"
-              y1="70"
+              y1="66"
               x2="75"
-              y2="70"
+              y2="66"
               fill="none"
               stroke="black"
               strokeMiterlimit="10"

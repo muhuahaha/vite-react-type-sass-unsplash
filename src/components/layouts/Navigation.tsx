@@ -1,8 +1,15 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useContext,
+} from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import HamburgerButton from './HamburgerButton';
 import { useAutoClose } from '../../hooks/useAutoClose';
 import useResize from '../../hooks/useResize';
+import { ThemeContext, ThemeContextType } from '../../context/ThemeContext';
 
 function Navigation() {
   const menuRef = useRef<HTMLUListElement>(null);
@@ -11,6 +18,10 @@ function Navigation() {
 
   const [show, setShow] = useState(false);
   const [reversed, setReversed] = useState(false);
+
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  console.log(theme, 'theme');
 
   const pathMatchRoute = (route: string) => {
     if (route === location.pathname) {
@@ -23,6 +34,8 @@ function Navigation() {
     event.stopPropagation();
     setShow(!show);
     setReversed(!reversed);
+    console.log(theme);
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   useEffect(() => {
@@ -33,10 +46,12 @@ function Navigation() {
   useResize({ setShow, show });
 
   return (
-    <div className="">
+    <>
       <header className="primary-header d-flex">
         <div className="logo">
-          <h1>YTK</h1>
+          <h1>
+            <div className="logo-typo">YTK</div>
+          </h1>
           <HamburgerButton
             onClick={onpress}
             label="Menu"
@@ -44,20 +59,6 @@ function Navigation() {
             aria-controls="primary-navigation"
             aria-expanded={show}
           />
-
-          {/* <button
-            onClick={(event) => {
-              event.stopPropagation();
-              setShow(!show);
-            }}
-            type="button"
-            className="mobile-nav-toggle"
-            aria-controls="primary-navigation"
-            aria-expanded={show}
-          >
-            <span className="sr-only" />
-            Menu
-          </button> */}
         </div>
 
         <nav className="navbarNav">
@@ -67,11 +68,10 @@ function Navigation() {
             className={`${show ? 'open' : 'close'} primary-navigation d-flex`}
             data-visible={show}
           >
-            <li className="navbarListItem">
-              <button
-                type="button"
+            <li className="navbarListItem bg-green-200">
+              <Link
+                to="/"
                 onClick={() => {
-                  navigate('/');
                   setShow(!show);
                   setReversed(!reversed);
                 }}
@@ -83,13 +83,12 @@ function Navigation() {
               >
                 <span aria-hidden="true">00</span>
                 Home
-              </button>
+              </Link>
             </li>
-            <li className="navbarListItem">
-              <button
-                type="button"
+            <li className="navbarListItem bg-green-300">
+              <Link
+                to="/about"
                 onClick={() => {
-                  navigate('/about');
                   setShow(!show);
                   setReversed(!reversed);
                 }}
@@ -101,9 +100,9 @@ function Navigation() {
               >
                 <span aria-hidden="true">01</span>
                 About
-              </button>
+              </Link>
             </li>
-            <li>
+            <li className="navbarListItem bg-green-100">
               <Link
                 to="/about"
                 className={
@@ -112,17 +111,19 @@ function Navigation() {
                     : 'navbarListItemName'
                 }
               >
-                <h1 style={{ color: 'white' }}>TeStttt</h1>
+                <span aria-hidden="true">02</span>
+                asdsd
               </Link>
             </li>
           </ul>
         </nav>
       </header>
-
-      <hr />
+      <div className={`${String(theme)}`}>
+        <div className="text background">asdsdasds</div>
+      </div>
 
       <Outlet />
-    </div>
+    </>
   );
 }
 

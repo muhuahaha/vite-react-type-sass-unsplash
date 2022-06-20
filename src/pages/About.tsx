@@ -1,29 +1,14 @@
-import React from 'react';
-import Spinner from '../components/layouts/Spinner';
+import { useContext } from 'react';
+import { ThemeContext, ThemeContextType } from '../context/ThemeContext';
 
 function About() {
+  const { theme } = useContext<ThemeContextType>(ThemeContext);
+
   return (
-    <div style={{ backgroundColor: 'blue' }}>
-      About
-      <div>
-        <Spinner />
-      </div>
-      <div>
-        <svg
-          width="126"
-          height="1"
-          viewBox="0 0 1000 1"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <line
-            className="line-one"
-            y1="0.5"
-            x2="126"
-            y2="0.5"
-            stroke="black"
-          />
-        </svg>
+    <div className={`${String(theme)} container d-flex`}>
+      <div className="text background">Hallo</div>
+      <div className="background text text-right">
+        lorem ipsum dolor sit amet, consectetur adip
       </div>
     </div>
   );

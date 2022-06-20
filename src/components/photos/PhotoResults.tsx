@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Progress from '../layouts/Progress';
+import PhotoItem from './PhotoItem';
 
 interface Photo {
   id: string;
@@ -41,11 +42,8 @@ function PhotoResults() {
   if (!loading) {
     return (
       <div className="photoResults">
-        {photos?.map((photo: Photo, index: number) => (
-          <div key={index.toString()}>
-            <h2>{photo.id}</h2>
-            <h3>{photo.urls.small}</h3>
-          </div>
+        {photos?.map((photo: Photo) => (
+          <PhotoItem key={photo.id} photo={photo} />
         ))}
       </div>
     );

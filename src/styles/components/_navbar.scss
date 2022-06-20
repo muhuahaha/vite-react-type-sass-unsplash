@@ -2,12 +2,12 @@
 @debug $colors;
 
 .navbar {
-  padding: 0.5rem;
-  // background-color: red;
+  // padding: 0.5rem;
+  background-color: rgb(170, 255, 0);
 }
 
 .navbarNav {
-  padding: 4rem;
+  padding: 0rem;
   // background-color: blue;
 }
 
@@ -27,23 +27,30 @@
 
 .navbarListItemNameActive {
   padding: 0.5rem;
-  background-color: aqua;
-  color: rgb(255, 0, 217);
+  background-color: rgb(183, 183, 183);
+  color: rgb(255, 255, 255);
 }
 
 .logo {
-  margin: 2rem;
+  margin-left: 2rem;
+  @include maxq(small) {
+    background-color: red;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    height: 50px;
+  }
 }
 
 .primary-header {
   align-items: center;
   justify-content: space-between;
+  background-color: rgb(204, 255, 0);
 }
 
 .primary-navigation {
   padding: 0;
   margin: 0;
-  background-color: rgba(0, 0, 0, 0.77);
+  background-color: rgba(230, 230, 230, 0.975);
   list-style: none;
 
   // @supports (backdrop-filter: blur(1rem)) {
@@ -52,15 +59,16 @@
   // }
   @media (min-width: 40em) and (max-width: 65em) {
     background-color: orange;
-    button > span[aria-hidden] {
+    margin-left: 1rem;
+    button > a span[aria-hidden] {
       display: none;
     }
   }
 
   @media (min-width: 40em) {
     gap: clamp(1.5rem, 5vw, 3rem);
-    padding-block: 2rem;
-    padding-inline: clamp(3rem, 15vw, 10rem);
+    padding-block: 0.2rem;
+    padding-inline: clamp(5rem, 15vw, 10rem);
   }
 
   @include maxq(small) {
@@ -90,13 +98,13 @@
 }
 
 .open {
-  background-color: darkgoldenrod;
+  // background-color: darkgoldenrod;
   // transform: translateX(0%);
   transition: all 350ms ease-out;
 }
 
 .close {
-  background-color: rgb(11, 164, 184);
+  // background-color: rgb(11, 164, 184);
   // transform: translateX(100%);
   transition: all 350ms ease-out;
 }
@@ -104,10 +112,11 @@
 .mobile-nav-toggle {
   display: block;
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  // width: 3rem;
-  padding: 0.1rem 0.5rem;
+  top: 1rem;
+  right: 1rem;
+  width: 50px;
+  height: 50px;
+  padding: 0.1rem 0.1rem;
   background-color: red;
   aspect-ratio: 1;
   border: none;
@@ -170,6 +179,24 @@
 //   }
 // }
 
-.test {
-  width: 80px;
+// .test {
+//   width: 60px;
+// }
+
+.light {
+  .text {
+    color: var(--clr-indigo-900);
+  }
+  .background {
+    background-color: var(--clr-green-100);
+  }
+}
+
+.dark {
+  .text {
+    color: var(--clr-slate-100);
+  }
+  .background {
+    background-color: var(--clr-stone-900);
+  }
 }
