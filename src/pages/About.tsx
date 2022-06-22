@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { ThemeContext, ThemeContextType } from '../context/ThemeContext';
+import { ThemeContext } from '../context/ThemeContext';
 
 function About() {
-  const { theme } = useContext<ThemeContextType>(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <div className={`${String(theme)} container d-flex`}>

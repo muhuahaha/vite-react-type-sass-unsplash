@@ -11,10 +11,10 @@ export const ThemeContext = createContext({
   undefined,
 });
 
-type TestProps = {
+type ThemeProviderProps = {
   children: React.ReactNode;
 };
-export const ThemeProvider = ({ children }: TestProps) => {
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState('light');
 
   return (

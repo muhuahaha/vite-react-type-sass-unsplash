@@ -8,6 +8,9 @@ import Navigation from './components/layouts/Navigation';
 import Home from './pages/Home';
 import Progress from './components/layouts/Progress';
 import PageOne from './pages/PageOne';
+import { UnsplashProvider } from './context/photos/UnsplashContext';
+import { AlertProvider } from './context/alert/AlertContext';
+import Alert from './components/layouts/Alert';
 
 const About = lazy(() => import('./pages/About'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -52,17 +55,22 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider>
-        <Router>
-          <Navigation />
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/page-one" element={<PageOnePage />} />
+        <UnsplashProvider>
+          <AlertProvider>
+            <Router>
+              <Navigation />
+              <Alert />
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/page-one" element={<PageOnePage />} />
 
-            <Route path="/notfound" element={<NotFoundPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Router>
+                <Route path="/notfound" element={<NotFoundPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Router>
+          </AlertProvider>
+        </UnsplashProvider>
       </ThemeProvider>
     </div>
   );

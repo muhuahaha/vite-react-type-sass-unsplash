@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
+import UnsplashContext from '../../context/photos/UnsplashContext';
 import Progress from '../layouts/Progress';
 import PhotoItem from './PhotoItem';
 
@@ -10,30 +11,7 @@ interface Photo {
 }
 
 function PhotoResults() {
-  const [photos, setPhotos] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const getPhotos = async () => {
-    const UNSPLASH_TOKEN = `${String(import.meta.env.VITE_API_UNSPLASH_TOKEN)}`;
-    const params = new URLSearchParams({
-      query: 'dog',
-      count: '10',
-    });
-    const response = await fetch(
-      `https://api.unsplash.com/photos/random?${params}`,
-      {
-        headers: {
-          Authorization: `Client-ID ${UNSPLASH_TOKEN}`,
-        },
-      }
-    );
-
-    const data = (await response.json()) as [];
-
-    console.log(JSON.stringify(data, null, 4));
-    setPhotos(data);
-    setLoading(false);
-  };
+  const { photos, loading, getPhotos } = useContext(UnsplashContext);
 
   useEffect(() => {
     getPhotos();
@@ -41,9 +19,9 @@ function PhotoResults() {
 
   if (!loading) {
     return (
-      <div className="photoResults">
-        {photos?.map((photo: Photo) => (
-          <PhotoItem key={photo.id} photo={photo} />
+      <div className="photoResults grid-container">
+        {photos?.map((photo: Photo, index: number) => (
+          <PhotoItem key={photo.id} photo={photo} index={index} />
         ))}
       </div>
     );
